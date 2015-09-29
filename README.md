@@ -1,16 +1,16 @@
 # Add2Package
 
-Are you tired of listing all of your Meteor package's files out by hand?
-
-_**Well I've got a solution for you!**_
-
-Introducing, **Add2Package** - the insanely easy way to add lots of files to your `package.js`
-
 _____
 #### WARNING:
 > This package is highly experimental and is not recommended for use in production applications.
 Becaue of the way the packaging system works, it will most likely not get much better. However, you may attempt to use it in your app but be warned that there are lots of quirks. That being said, I'm currently using it on a live (non-production) app and it is working pretty well.
 _____
+
+Are you tired of listing all of your Meteor package's files out by hand?
+
+_**Well I've got a solution for you!**_
+
+Introducing, **Add2Package** - the insanely easy way to add lots of files to your `package.js`
 
 ### Why?
 
