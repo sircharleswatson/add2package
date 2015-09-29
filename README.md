@@ -45,7 +45,8 @@ Package.onUse(function(api) {
 
   setTimeout(function() {
 
-    // You have to tell us what folder your package is in and pass in a reference to the api
+    // You have to tell us what folder your package is in and pass in
+    // a reference to the api
     packageFolder('stargazing-styles', api);
 
 
