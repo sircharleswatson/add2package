@@ -6,6 +6,12 @@ _**Well I've got a solution for you!**_
 
 Introducing, **Add2Package** - the insanely easy way to add lots of files to your `package.js`
 
+_____
+#### WARNING:
+> This package is highly experimental and is not recommended for use in production applications.
+Becaue of the way the packaging system works, it will most likely not get much better. However, you may attempt to use it in your app but be warned that there are lots of quirks. That being said, I'm currently using it on a live (non-production) app and it is working pretty well.
+_____
+
 ### Why?
 
 See above.
@@ -36,23 +42,57 @@ Package.onUse(function(api) {
     'semantic:ui@2.1.4'
   ]);
 
-  // You have to tell us what folder your package is in and pass in a reference to the api
-  packageFolder('stargazing-styles', api);
+
+  setTimeout(function() {
+
+    // You have to tell us what folder your package is in and pass in a reference to the api
+    packageFolder('stargazing-styles', api);
 
 
-  // Then it's really simple after that
+    // Then it's really simple after that
 
-  // Add the Semantic UI Themes
-  addFiles('client/lib/semantic-ui/themes/**/*.*', 'client');
+    // Add the Semantic UI Themes
+    addFiles('client/lib/semantic-ui/themes/**/*.*', 'client');
 
-  // Add the definitions and site files
-  addFiles('client/lib/semantic-ui/+(definitions|site)/**/*.*', 'client');
+    // Add the definitions and site files
+    addFiles('client/lib/semantic-ui/+(definitions|site)/**/*.*', 'client');
 
-  // Add everything else not in the semantic-ui directory
-  addFiles('client/lib/semantic-ui/!(definitions|site|themes)', 'client');
+    // Add everything else not in the semantic-ui directory
+    addFiles('client/lib/semantic-ui/!(definitions|site|themes)', 'client');
+
+  }, 100)
 
 })
 ```
+
+Here's another example without all the comments:
+
+```javascript
+Package.describe({
+  name: 'my:components',
+  version: '0.0.0'
+})
+
+Package.onUse(function(api) {
+  api.versionsFrom('1.2')
+  api.use([
+    'ecmascript',
+    'react',
+    'scw:add2package'
+  ])
+
+  setTimeout(function() {
+    packageFolder('my-components', api)
+
+    addFiles('lib/components-list.jsx')
+    addFiles('lib/forms/**/!(auth-box).jsx')
+    addFiles('lib/forms/**/auth-box.jsx')
+    addFiles('lib/layouts/**.*')
+  }, 100)
+})
+```
+
+**Note:** You must use the `setTimeout()` as shown above or it won't work. You also may need to play with the delay a bit.
 
 ### What's this [Glob](https://github.com/isaacs/node-glob) stuff you mentioned?
 

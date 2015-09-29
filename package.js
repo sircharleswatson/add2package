@@ -1,3 +1,15 @@
+Package.describe({
+  name: 'scw:add2package',
+  version: '0.0.1',
+  summary: 'Easily add files and assets to your packages - with Globs!',
+  git: 'https://github.com/sircharleswatson/add2package',
+  documentation: 'README.md'
+})
+
+Package.onUse(function(api) {
+  api.versionsFrom('1.2.0.1')
+})
+
 /*
 *
 * Add2Package
@@ -50,7 +62,7 @@ function getFiles(glob) {
 
 function parseTarget(target) {
 
-  if (target === "both") {
+  if (target === "both" || target === undefined) {
     target = ['client', 'server'];
   } else {
     target = [target];
@@ -58,16 +70,3 @@ function parseTarget(target) {
 
   return target;
 }
-
-
-Package.describe({
-  name: 'scw:add2package',
-  version: '0.0.1',
-  summary: 'Easily add files and assets to your packages - with Globs!',
-  git: 'https://github.com/sircharleswatson/add2package',
-  documentation: 'README.md'
-})
-
-Package.onUse(function(api) {
-  api.versionsFrom('1.2.0.1')
-})
