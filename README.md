@@ -18,11 +18,18 @@ See above.
 
 Just kidding. You know why I made this package? Have you ever tried adding [Semantic-UI](https://github.com/Semantic-Org/Semantic-UI-Meteor) to a Meteor package? It easily can be 200+ files and there is no way I'm going to add them all by hand to the `package.js` file.
 
-Thus, **scw:add2package** was born.
+Thus, **Add2Package** was born.
 
 ### How?
 
-It's pretty simple. When you're creating a new package, just add this package to your package (_packageception_).
+As it stands, the only difficult part of using this "package" is that you can't use it directly from atmosphere.
+In other words, you can't do `meteor add scw:add2package`.
+
+To get around that, the only way to use it is to clone this repo to your `PACKAGE_DIRS` and make sure you export that variable in your terminal shell. ([more info on that here](https://dweldon.silvrback.com/local-packages))
+
+This package creates a few global functions that you can use in your packages.
+
+**Please read the [quirks](https://github.com/sircharleswatson/add2package#quirks) at the bottom before trying to use this!**
 
 #### Let me show you...
 
@@ -37,7 +44,6 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2');
 
   api.use([
-    'scw:add2package', //<-- That's us!
     'flemay:less-autoprefixer@1.1.0',
     'semantic:ui@2.1.4'
   ]);
@@ -45,10 +51,9 @@ Package.onUse(function(api) {
 
   setTimeout(function() {
 
-    // You have to tell us what folder your package is in and pass in
-    // a reference to the api
+    // You have to tell us what folder your package is in
+    // and pass in a reference to the api
     packageFolder('stargazing-styles', api);
-
 
     // Then it's really simple after that
 
@@ -78,8 +83,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2')
   api.use([
     'ecmascript',
-    'react',
-    'scw:add2package'
+    'react'
   ])
 
   setTimeout(function() {
@@ -149,6 +153,14 @@ This method basically matches the `api.addFiles` method but it allows you to def
 ### addAssets(pattern, target)
 
 Same as `addFiles()` but used to add assets.
+
+
+# Quirks
+
+* Must be a local package cloned to your `PACKAGE_DIRS`
+* Must add your files in the callback of a `setTimeout()`
+* Will not work for stand-alone packages
+  * In other words, you can't add this package to a package that will be published to Atmosphere. It will only work if it's available in your local packages as mentioned above.
 
 _____
 
